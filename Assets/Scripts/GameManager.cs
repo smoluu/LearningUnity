@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-            FindObjectOfType<AudioManager>().Play("Ambient0");
+             // FindObjectOfType<AudioManager>().Play("Ambient0");
         
     }
 }

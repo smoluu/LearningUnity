@@ -13,11 +13,11 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
+        int vertical = 0;
+        int horizontal = 0;
 
     void Update()
     {
-        int vertical = 0;
-        int horizontal = 0;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -40,8 +40,12 @@ public class PlayerController : MonoBehaviour
         {
             horizontal = 1;
         }
+
         transform.position += transform.forward * vertical * Time.deltaTime * liikenopeus;
 
         transform.eulerAngles += new Vector3(0, horizontal, 0) * Time.deltaTime * kaantonopeus;
+
+        vertical = 0;
+        horizontal = 0;
     }
 }
