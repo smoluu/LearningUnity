@@ -8,21 +8,26 @@ using UnityEngine.UIElements;
 public class MeshGenerator : MonoBehaviour
 {
     public Button Refresh ;
-    public float width;
-    public float height;
-    public float lenght;
+    [SerializeField]
+    [Range(1f, 10f)] public float width;
+    [Range(1f, 10f)]
+    [SerializeField] public float height;
+    [Range(1f,10f)]
+    [SerializeField] public float lenght;
     Mesh mesh;
     Vector3[] vertices;
     int[] triangles;
+    List<Vector3> normals;
+    
     
     void Start()
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
-        CreateShape();
-        UpdateMesh();
+        
+        
     }
-    void CreateShape()
+    public void CreateShape()
     {
         vertices = new Vector3[]
         {
@@ -44,17 +49,30 @@ public class MeshGenerator : MonoBehaviour
             1,4,3,
             4,5,3,
         };
+        List<Vector3> normals = new List<Vector3>() { 
+            new Vector3(0,0,1),
+            new Vector3(0,0,1),
+            new Vector3(0,0,1),
+            new Vector3(0,0,1),
+            new Vector3(0,0,1),
+            new Vector3(0,0,1)
+           
+        };
     }
     void UpdateMesh()
     {
         mesh.Clear();
-        mesh.vertices = vertices;
+        mesh.SetVertices( vertices );
         mesh.triangles = triangles;
+        //mesh.SetNormals( normals );
         mesh.RecalculateNormals();
     }
 
     private void Update()
     {
+        CreateShape();
+        UpdateMesh();
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             CreateShape();
